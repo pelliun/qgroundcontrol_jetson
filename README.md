@@ -1,25 +1,26 @@
 # QGroundControl Ground Control Station
+For Build nVidia Jetpack 5.1.2 (using AGX Orin device) - Ubuntu20.04, Arm64
 
-[![Releases](https://img.shields.io/github/release/mavlink/QGroundControl.svg)](https://github.com/mavlink/QGroundControl/releases)
-[![Travis Build Status](https://travis-ci.org/mavlink/qgroundcontrol.svg?branch=master)](https://travis-ci.org/mavlink/qgroundcontrol)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/crxcm4qayejuvh6c/branch/master?svg=true)](https://ci.appveyor.com/project/mavlink/qgroundcontrol)
+source build (https://docs.qgroundcontrol.com/master/en/qgc-dev-guide/getting_started/index.html)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mavlink/qgroundcontrol?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+#build
+cmake -B build -G Ninja CMAKE_BUILD_TYPE=Release
+cmake --build build --config Release
+#run
+./build/QGroundControl
+
+(while build and run, install qt libraries.)
+#build
+ - such as libqt5-***-dev or qt***-dev
+#run
+ - such as qml-module-*
 
 
-*QGroundControl* (QGC) is an intuitive and powerful ground control station (GCS) for UAVs.
+#make appimage
+./deploy/create_linux_appimage_arm.sh $PWD $PWD/build/
 
-The primary goal of QGC is ease of use for both first time and professional users. 
-It provides full flight control and mission planning for any MAVLink enabled drone, and vehicle setup for both PX4 and ArduPilot powered UAVs. Instructions for *using QGroundControl* are provided in the [User Manual](https://docs.qgroundcontrol.com/en/) (you may not need them because the UI is very intuitive!)
-
-All the code is open-source, so you can contribute and evolve it as you want. 
-The [Developer Guide](https://dev.qgroundcontrol.com/en/) explains how to [build](https://dev.qgroundcontrol.com/en/getting_started/) and extend QGC.
-
-
-Key Links: 
-* [Website](http://qgroundcontrol.com) (qgroundcontrol.com)
-* [User Manual](https://docs.qgroundcontrol.com/en/)
-* [Developer Guide](https://dev.qgroundcontrol.com/en/)
-* [Discussion/Support](https://docs.qgroundcontrol.com/en/Support/Support.html)
-* [Contributing](https://dev.qgroundcontrol.com/en/contribute/)
-* [License](https://github.com/mavlink/qgroundcontrol/blob/master/COPYING.md)
+#run
+sudo apt install libqt5quickcontrols2-5 libqt5charts5 libqt5serialport5 libqt5texttospeech5 libqt5location5 libqt5multimedia5 libqt5x11extras5 libqt5sql5-sqlite
+sudo apt install qml-module-qtquick-controls qml-module-qtquick-layouts qml-module-qtquick-controls2 qml-module-gsettings1.0 qml-module-qtquick-dialogs qml-module-qtqml-models2 qml-module-qt-labs-settings qml-module-qtlocation qml-module-qt-labs-folderlistmodel qml-module-qtpositioning qml-module-qtcharts 
+chmod +x QGroundControl.AppImage
+./QGroundControl.AppImage
